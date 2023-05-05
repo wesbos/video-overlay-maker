@@ -1,0 +1,266 @@
+:root {
+  --width: 1080px;
+  --height: 1920px;
+  --fontSize: 100px;
+  --scale: 0.5;
+  --yellow: #ffc600;
+  --blue: #193549;
+  --dark: #1e131e;
+  --light: #fff;
+  --checkerboard: linear-gradient(45deg, #fff 25%, transparent 25%), linear-gradient(-45deg, #fff 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #fff 75%), linear-gradient(-45deg, transparent 75%, #fff 75%);
+}
+
+html {
+  font-family: "Radnika Next", sans-serif;
+  font-size: 10px;
+  color: white;
+}
+
+body {
+  background: var(--dark);
+  display: grid;
+  justify-content: center;
+}
+
+.overlay {
+  width: var(--width);
+  height: var(--height);
+  margin: 0 auto;
+  display: grid;
+  container-type: inline-size;
+  container-name: overlay;
+  place-items: center;
+  transition: all 0.2s;
+}
+
+.preview .overlay {
+  max-width: 100%;
+  overflow: hidden;
+  background: url("./images/example.png") center;
+  background-size: contain;
+}
+
+h2 {
+  font-size: var(--fontSize);
+  color: #000000;
+  /* letter-spacing: -0.01em; */
+  letter-spacing: -5px;
+  text-align: center;
+  font-weight: 900;
+  /* margin-bottom: -0.7em; */
+  margin-bottom: -80px;
+  /* margin-top: -0.7em; */
+  margin-top: -80px;
+  transform-style: preserve-3d;
+  line-height: 1;
+}
+
+.text {
+  background: white url("./images/blackgrit.png");
+  background-size: 500px;
+  background-position: 50%;
+  width: 100%;
+  position: relative;
+}
+
+.text:before,
+.text:after {
+  content: "";
+  height: 100px;
+  width: calc(100% + 50px);
+  display: block;
+  background-image: url("./images/rip.svg");
+  background-size: cover;
+  position: absolute;
+  top: 0;
+  transform: translateX(-25px) translateY(-50%);
+  z-index: -1;
+  background-size: 100%;
+  pointer-events: none;
+  rotate: -3deg;
+  /* border: 1px solid green; */
+}
+
+.text:after {
+  background-image: url("./images/rip.svg");
+  background-position: center bottom;
+  bottom: 0;
+  top: auto;
+  transform: translateY(50%);
+  /* border: 1px solid red; */
+}
+/* One liner */
+
+.oneLiner .text {
+  /* background-image: url("./images/rip.svg"); */
+  background-position: center;
+  background-color: transparent;
+  background-size: contain;
+  &:before {
+    transform: translateY(-20%);
+  }
+  &:after {
+    transform: translateY(50%);
+  }
+
+  & h2 {
+    margin: 0;
+  }
+}
+
+.grit {
+  position: absolute;
+  background: url("./images/blackgrit.png") center;
+  background-size: contain;
+  width: 100%;
+  height: 100%;
+  z-index: 4;
+  pointer-events: none;
+  height: 30%;
+  rotate: 6deg;
+}
+
+.grit.white {
+  background-image: url("./images/whitegrit.png");
+  z-index: 5;
+}
+
+mark {
+  background: none;
+  position: relative;
+  z-index: 2;
+}
+
+mark:before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 50%;
+  background: var(--yellow);
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: translateY(50%);
+  z-index: -1;
+  rotate: -1deg;
+}
+
+.output {
+  text-align: center;
+}
+
+.output img {
+  width: 50px;
+  border: 1px solid black;
+  --checkerboardSize: 5px;
+  --checkerboardHalf: calc(var(--checkerboardSize) / 2);
+  --checkerboardNeg: calc(var(--checkerboardHalf) * -1);
+  background-size: var(--checkerboardSize) var(--checkerboardSize);
+  background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+  background-position: 0 0, 0 var(--checkerboardHalf), var(--checkerboardHalf) var(--checkerboardNeg),
+    var(--checkerboardNeg) 0px;
+
+  background-color: #ccc;
+  background-image: var(--checkerboard);
+}
+
+.wrap.preview {
+  margin: 0 auto;
+  scale: var(--scale);
+  transform-origin: top center;
+}
+
+.wrap {
+  display: inline-grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: 1fr auto;
+  .displaySize {
+    font-size: 30px;
+    color: white;
+    margin: 0;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    padding-block: 20px;
+    &:before,
+    &:after {
+      content: "";
+      display: block;
+      inline-size: 50%;
+      block-size: 2px;
+      background: white;
+    }
+  }
+  .displayHeight {
+    writing-mode: vertical-rl;
+    grid-column: 2;
+    grid-row: 2;
+  }
+  .overlay {
+    grid-column: 1;
+    grid-row: 2;
+  }
+}
+
+/* Controls */
+.controls {
+  text-align: center;
+  display: grid;
+  gap: 20px;
+  max-width: 800px;
+  margin: 20px auto;
+  & button {
+    background: none;
+    border: 1px solid var(--light);
+    color: var(--light);
+    border-radius: 20px;
+    padding: 5px 10px;
+    font-family: "Radnika Next", sans-serif;
+    font-weight: 600;
+    display: flex;
+    place-items: center;
+    gap: 10px;
+  }
+  & textarea {
+    text-align: center;
+    width: 50%;
+    height: 100px;
+    resize: vertical;
+    border-radius: 20px;
+    border: 1px solid var(--light);
+    color: var(--light);
+    background: none;
+  }
+  .group {
+    display: flex;
+    place-items: center;
+    align-items: stretch;
+    gap: 20px;
+    justify-content: center;
+  }
+  & label {
+    display: inline-grid;
+    gap: 20px;
+    grid-auto-flow: column;
+    place-items: center;
+  }
+  .sizeVisual {
+    display: inline-block;
+    height: 15px;
+    background: rgba(255, 255, 255, 0.3);
+    border: 0.5px solid white;
+    aspect-ratio: 16 / 9;
+  }
+  & button[data-width="1080px"][data-height="1920px"] .sizeVisual {
+    aspect-ratio: 9 / 16;
+  }
+  & button[data-width="1920px"][data-height="1920px"] .sizeVisual {
+    aspect-ratio: 16 / 16;
+  }
+  .sizeText {
+    font-size: 10px;
+  }
+}

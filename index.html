@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Overlay Filler</title>
+    <link rel="stylesheet" href="./style.css" />
+    <script type="module" src="./scripts.ts"></script>
+    <link rel="icon" href="https://fav.farm/🥨" />
+  </head>
+  <body>
+    <div class="controls">
+      <div class="group">
+        <textarea>
+      Async
+      LocalStorage
+      JS API
+    </textarea
+        >
+      </div>
+      <div class="group">
+        <button data-width="1080px" data-height="1920px">
+          <span class="sizeVisual"></span><span class="sizeText">1080 × 1920</span>
+        </button>
+        <button data-width="1920px" data-height="1920px">
+          <span class="sizeVisual"></span><span class="sizeText">1920 × 1920</span>
+        </button>
+        <button data-width="1920px" data-height="1080px">
+          <span class="sizeVisual"></span><span class="sizeText">1920 × 1080</span>
+        </button>
+        <button class="generate">📸 Snapshot</button>
+      </div>
+      <div class="group">
+        <label>
+          Scale
+          <input class="mirror" name="scale" type="range" min="0.05" max="1" step="0.05" />
+        </label>
+        <label>
+          Font Size
+          <input class="mirror" data-unit="px" name="fontSize" type="range" min="20" max="300" value="100" step="1" />
+        </label>
+      </div>
+    </div>
+
+    <div class="output"></div>
+
+    <div class="wrap preview">
+      <p class="displaySize displayWidth" data-bind="--width">1080px</p>
+      <p class="displaySize displayHeight" data-bind="--height">1920px</p>
+      <div class="overlay">
+        <div class="grit white"></div>
+        <div class="grit black"></div>
+        <div class="text">
+          <h2>
+            <mark>Async</mark><br />
+            <mark>LocalStorage</mark><br />
+            <mark>JS API</mark>
+          </h2>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
