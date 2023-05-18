@@ -32,12 +32,13 @@ body {
   container-name: overlay;
   place-items: center;
   transition: all 0.2s;
+  background: #00b140;
 }
 
 .preview .overlay {
   max-width: 100%;
   overflow: hidden;
-  background: url("./images/example.png") center;
+  /* background: url("./images/example.png") center; */
   background-size: contain;
 }
 
@@ -92,7 +93,8 @@ h2 {
 }
 /* One liner */
 
-.oneLiner .text {
+/* TODO: Replace with :has nth-child when landed in Firefox */
+.shortBoi .text {
   /* background-image: url("./images/rip.svg"); */
   background-position: center;
   background-color: transparent;
@@ -101,7 +103,7 @@ h2 {
     transform: translateY(-20%);
   }
   &:after {
-    transform: translateY(50%);
+    transform: translateY(25%);
   }
 
   & h2 {
@@ -112,13 +114,16 @@ h2 {
 .grit {
   position: absolute;
   background: url("./images/blackgrit.png") center;
-  background-size: contain;
+  --bg-x: calc(1px * var(--randomX, 1));
+  --bg-y: calc(1px * var(--randomY, 1));
+  background-position: var(--bg-x) var(--bg-y);
   width: 100%;
   height: 100%;
   z-index: 4;
   pointer-events: none;
-  height: 30%;
+  height: 100%;
   rotate: 6deg;
+  /* animation: 10s steps(10) 0s infinite normal none running gritty; */
 }
 
 .grit.white {

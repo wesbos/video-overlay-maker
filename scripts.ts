@@ -9,6 +9,14 @@ const h2 = document.querySelector<HTMLHeadingElement>('.text h2');
 const sizeButtons = document.querySelectorAll<HTMLButtonElement>('.controls [data-width]');
 const rangeInputs = document.querySelectorAll<HTMLInputElement>('.controls [type="range"]');
 
+function randomGrit() {
+  const randomX = Math.floor(Math.random() * 1000);
+  const randomY = Math.floor(Math.random() * 1000);
+  document.body.style.setProperty('--randomX', randomX.toString());
+  document.body.style.setProperty('--randomY', randomY.toString());
+}
+setInterval(randomGrit, 100);
+
 async function handleSnapshot() {
   if (!overlayEl || !outputEl || !wrap) return;
   // Take the preview class on
@@ -40,10 +48,10 @@ function handleTextareaInput() {
 
   h2.innerHTML = lines?.join('<br>') || '';
   // If there is only 1 line, add a class
-  if (lines?.length === 1) {
-    overlayEl?.classList.add('oneLiner');
+  if (lines?.length === 1 || lines?.length === 1) {
+    overlayEl?.classList.add('shortBoi');
   } else {
-    overlayEl?.classList.remove('oneLiner');
+    overlayEl?.classList.remove('shortBoi');
   }
 }
 
