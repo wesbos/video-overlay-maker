@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "vite"
+    "start": "vite",
+    "build": "vite build"
   },
   "keywords": [],
   "author": "Wes Bos (https://wesbos.com/)",
@@ -13,6 +14,9 @@
   "type": "module",
   "dependencies": {
     "html2canvas": "^1.4.1",
+    "playwright": "^1.33.0",
+    "puppeteer": "^20.2.1",
+    "puppeteer-screen-recorder": "^2.1.2",
     "vite": "^4.3.5"
   }
 }

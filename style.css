@@ -32,7 +32,7 @@ body {
   container-name: overlay;
   place-items: center;
   transition: all 0.2s;
-  background: #00b140;
+  background: transparent;
 }
 
 .preview .overlay {

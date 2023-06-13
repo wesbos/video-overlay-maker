@@ -15,7 +15,7 @@ function randomGrit() {
   document.body.style.setProperty('--randomX', randomX.toString());
   document.body.style.setProperty('--randomY', randomY.toString());
 }
-setInterval(randomGrit, 100);
+// setInterval(randomGrit, 100);
 
 async function handleSnapshot() {
   if (!overlayEl || !outputEl || !wrap) return;
@@ -48,7 +48,7 @@ function handleTextareaInput() {
 
   h2.innerHTML = lines?.join('<br>') || '';
   // If there is only 1 line, add a class
-  if (lines?.length === 1 || lines?.length === 1) {
+  if (lines.length === 1 || lines.length === 1) {
     overlayEl?.classList.add('shortBoi');
   } else {
     overlayEl?.classList.remove('shortBoi');
