@@ -14,7 +14,7 @@
     "prepare": "vp config"
   },
   "dependencies": {
-    "html2canvas": "^1.4.1",
+    "@zumer/snapdom": "^2.7.0",
     "playwright": "^1.59.1",
     "vite": "npm:@voidzero-dev/vite-plus-core@latest"
   },

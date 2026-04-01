@@ -1,13 +1,14 @@
-import html2canvas from "html2canvas";
+import { snapdom } from "@zumer/snapdom";
 
 const overlayEl = document.querySelector<HTMLDivElement>(".overlay");
 const outputEl = document.querySelector<HTMLDivElement>(".output");
 const wrap = document.querySelector<HTMLDivElement>(".wrap");
 const generateButton = document.querySelector<HTMLButtonElement>(".generate");
-const textarea = document.querySelector<HTMLButtonElement>(".controls textarea");
+const textarea = document.querySelector<HTMLTextAreaElement>(".controls textarea");
 const h2 = document.querySelector<HTMLHeadingElement>(".text h2");
 const sizeButtons = document.querySelectorAll<HTMLButtonElement>(".controls [data-width]");
 const rangeInputs = document.querySelectorAll<HTMLInputElement>('.controls [type="range"]');
+const fitTextModeInput = document.querySelector<HTMLInputElement>('.controls [name="fitTextMode"]');
 
 function randomGrit() {
   const randomX = Math.floor(Math.random() * 1000);
@@ -17,24 +18,43 @@ function randomGrit() {
 }
 // setInterval(randomGrit, 100);
 
+function applyFitTextMode() {
+  if (!h2) return;
+  const marks = [...h2.querySelectorAll<HTMLElement>("mark")];
+  if (!marks.length) return;
+  marks.forEach((mark) => mark.style.removeProperty("font-size"));
+  if (!fitTextModeInput?.checked) return;
+
+  const widths = marks.map((mark) => mark.getBoundingClientRect().width);
+  const largestWidth = Math.max(...widths);
+  if (!largestWidth) return;
+
+  marks.forEach((mark, index) => {
+    const currentWidth = widths[index];
+    if (!currentWidth || currentWidth >= largestWidth) return;
+    const ratio = largestWidth / currentWidth;
+    mark.style.fontSize = `${ratio}em`;
+  });
+}
+
 async function handleSnapshot() {
   if (!overlayEl || !outputEl || !wrap) return;
-  // Take the preview class on
   wrap.classList.remove("preview");
-  const canvas = await html2canvas(overlayEl, {
-    backgroundColor: null,
-  });
-  const dataUrl = canvas.toDataURL("image/png");
-  const html = /* html */ `
-    <a href="${dataUrl}" download="${overlayEl?.textContent || "thumbnail.png"}">
-      <img src="${dataUrl}">
-    </a>
-    `;
-  // make a dom fragment
-  const frag = document.createRange().createContextualFragment(html);
-  // append to output
-  outputEl?.appendChild(frag);
-  wrap?.classList.add("preview");
+  try {
+    const image = await snapdom.toPng(overlayEl);
+    const dataUrl = image.src;
+    image.style.removeProperty("width");
+    image.style.removeProperty("height");
+    image.removeAttribute("width");
+    image.removeAttribute("height");
+    const link = document.createElement("a");
+    link.href = dataUrl;
+    link.download = `${overlayEl.textContent?.trim() || "thumbnail"}.png`;
+    link.appendChild(image);
+    outputEl.appendChild(link);
+  } finally {
+    wrap.classList.add("preview");
+  }
 }
 
 function handleTextareaInput() {
@@ -53,6 +73,7 @@ function handleTextareaInput() {
   } else {
     overlayEl?.classList.remove("shortBoi");
   }
+  applyFitTextMode();
 }
 
 function handleSizeButtonClick(e: MouseEvent) {
@@ -67,6 +88,7 @@ function handleSizeButtonClick(e: MouseEvent) {
       bound.textContent = value.toString();
     }
   });
+  applyFitTextMode();
 }
 
 function handleRangeInput(e: Event) {
@@ -75,6 +97,7 @@ function handleRangeInput(e: Event) {
   const { name } = target;
   const { unit } = target.dataset;
   document.documentElement.style.setProperty(`--${name}`, `${value}${unit || ""}`);
+  applyFitTextMode();
 }
 
 // Event Handlers
@@ -82,4 +105,5 @@ textarea?.addEventListener("input", handleTextareaInput);
 sizeButtons.forEach((button) => button.addEventListener("click", handleSizeButtonClick));
 rangeInputs.forEach((input) => input.addEventListener("input", handleRangeInput));
 generateButton?.addEventListener("click", handleSnapshot);
+fitTextModeInput?.addEventListener("change", applyFitTextMode);
 handleTextareaInput();

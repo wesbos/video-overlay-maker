@@ -268,6 +268,14 @@ mark:before {
     grid-auto-flow: column;
     place-items: center;
   }
+  & label.toggle {
+    display: inline-flex;
+    gap: 10px;
+    align-items: center;
+  }
+  & label.toggle input {
+    accent-color: var(--yellow);
+  }
   .sizeVisual {
     display: inline-block;
     height: 15px;

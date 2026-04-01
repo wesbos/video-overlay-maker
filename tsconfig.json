@@ -2,7 +2,8 @@
   "include": ["./**/*"],
   "compilerOptions": {
     "strict": true,
-    "module": "es2022",
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
     "target": "es2022",
     "lib": ["ESNext", "DOM", "DOM.Iterable"],
     "skipLibCheck": true
