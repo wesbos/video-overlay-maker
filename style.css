@@ -9,12 +9,17 @@
   --blue: #193549;
   --dark: #1e131e;
   --light: #fff;
-  --checkerboard: linear-gradient(45deg, #fff 25%, transparent 25%), linear-gradient(-45deg, #fff 25%, transparent 25%),
-    linear-gradient(45deg, transparent 75%, #fff 75%), linear-gradient(-45deg, transparent 75%, #fff 75%);
+  --checkerboard:
+    linear-gradient(45deg, #fff 25%, transparent 25%),
+    linear-gradient(-45deg, #fff 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #fff 75%),
+    linear-gradient(-45deg, transparent 75%, #fff 75%);
 }
 
 html {
-  font-family: Radnika Next, sans-serif;
+  font-family:
+    Radnika Next,
+    sans-serif;
   /* font-family: "MD IO", sans-serif; */
   font-size: 10px;
   color: white;
@@ -166,8 +171,15 @@ mark:before {
   --checkerboardHalf: calc(var(--checkerboardSize) / 2);
   --checkerboardNeg: calc(var(--checkerboardHalf) * -1);
   background-size: var(--checkerboardSize) var(--checkerboardSize);
-  background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
-  background-position: 0 0, 0 var(--checkerboardHalf), var(--checkerboardHalf) var(--checkerboardNeg),
+  background-position:
+    0 0,
+    0 10px,
+    10px -10px,
+    -10px 0px;
+  background-position:
+    0 0,
+    0 var(--checkerboardHalf),
+    var(--checkerboardHalf) var(--checkerboardNeg),
     var(--checkerboardNeg) 0px;
 
   background-color: #ccc;
