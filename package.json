@@ -15,8 +15,6 @@
   "dependencies": {
     "html2canvas": "^1.4.1",
     "playwright": "^1.33.0",
-    "puppeteer": "^20.2.1",
-    "puppeteer-screen-recorder": "^2.1.2",
     "vite": "^4.3.5"
   }
 }

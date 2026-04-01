@@ -4,6 +4,8 @@
   --fontSize: 100px;
   --scale: 0.5;
   --yellow: #ffc600;
+  --syntax-yellow: #fabf46; /* Syntax yellow */
+  --green: #b2ff00;
   --blue: #193549;
   --dark: #1e131e;
   --light: #fff;
@@ -12,7 +14,8 @@
 }
 
 html {
-  font-family: "Radnika Next", sans-serif;
+  font-family: Radnika Next, sans-serif;
+  /* font-family: "MD IO", sans-serif; */
   font-size: 10px;
   color: white;
 }
@@ -112,6 +115,7 @@ h2 {
 }
 
 .grit {
+  display: none;
   position: absolute;
   background: url("./images/blackgrit.png") center;
   --bg-x: calc(1px * var(--randomX, 1));
